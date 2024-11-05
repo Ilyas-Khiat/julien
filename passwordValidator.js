@@ -1,9 +1,17 @@
 function verify_passworrd(password) {
+    // Password must be at least 8 characters long
     if (password.length < 8) {
-        return {valid: false, reason: "Password is too short"};
+        return false;
     }
 
-    return {valid: true};
+    // Password must contain at least one number
+    if (!/\d/.test(password)) {
+        return false;
+    }
+
+    
+
+    return true;
 }
 
 module.exports = verify_passworrd;
