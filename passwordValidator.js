@@ -1,5 +1,4 @@
 
-
 function verify_password(password, options = {}) {
     const {
         length_limit = 8,

@@ -2,9 +2,10 @@
   "name": "julien",
   "version": "1.0.0",
   "description": "glrt  \u0000 \u0000",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "main": "node main.js"
   },
   "keywords": [],
   "author": "",
