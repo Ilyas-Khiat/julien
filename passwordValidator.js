@@ -1,22 +1,38 @@
 
 
-function verify_passworrd(password,length_limit = 8,) {
-    // Password must be at least 8 characters long
-    if (password.length < 8) {
+function verify_password(password, options = {}) {
+    const {
+        length_limit = 8,
+        min_letters = 1,
+        min_numbers = 1,
+        custom_rules = []
+    } = options;
+
+    // Check minimum length
+    if (password.length < length_limit) {
         return false;
     }
 
-    // Password must contain at least one number
-    if (!/\d/.test(password)) {
+    // Check minimum number of letters
+    const letterCount = (password.match(/[a-zA-Z]/g) || []).length;
+    if (letterCount < min_letters) {
         return false;
     }
 
-    // Password must contain at least one letter
-    if (!/[a-zA-Z]/.test(password)) {
+    // Check minimum number of numbers
+    const numberCount = (password.match(/\d/g) || []).length;
+    if (numberCount < min_numbers) {
         return false;
+    }
+
+    // Check custom rules
+    for (const rule of custom_rules) {
+        if (typeof rule === 'function' && !rule(password)) {
+            return false;
+        }
     }
 
     return true;
 }
 
-module.exports = verify_passworrd;
+module.exports = verify_password;
