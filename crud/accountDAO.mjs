@@ -1,13 +1,14 @@
 import { ACCOUNT_LIST } from "./database.mjs";
 
 export const accountDAO = {
+
   insertAccount(account) {
     console.log(`--> Inserting account with name ${account.firstName} ${account.lastName}`);
     ACCOUNT_LIST.push(account);
     console.log('Account created');
-    console.log(ACCOUNT_LIST);
     return account;
   },
+
   retrieveAccountList() {
     return ACCOUNT_LIST.map((account) => {
       //get all but date
@@ -16,6 +17,7 @@ export const accountDAO = {
     });
 
   },
+
   updateAccount(account) {
     console.log(`--> Updating account with id ${account.id}`);
     const index = ACCOUNT_LIST.findIndex((acc) => acc.id === account.id);
@@ -23,13 +25,15 @@ export const accountDAO = {
       console.error(`Account with id ${account.id} not found`);
       return;
     }
-
-    ACCOUNT_LIST[index] = account;
+    
+    ACCOUNT_LIST[index].firstName = account.firstName;
+    ACCOUNT_LIST[index].lastName = account.lastName;
 
     console.log('Acount updated');
-    console.log(ACCOUNT_LIST);
+    
     return account;
   },
+
   retrieveAccount(id) {
     const account = ACCOUNT_LIST.find((acc) => acc.id === id);
 
